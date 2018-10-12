@@ -69,10 +69,11 @@ class Simulation(object):
         -- Once len(population) is the same as self.population_size, returns population.
     '''
 
-    def __init__(self, population_size, vacc_percentage, virus_name,
+    def __init__(self, population_size, vax_percentage, virus_name,
                  mortality_rate, basic_repro_num, initial_infected=1):
         self.population_size = population_size
         self.population = []
+        self.vax_percentage = vax_percentage
         self.total_infected = 0
         self.current_infected = 0
         self.next_person_id = 0
@@ -96,31 +97,41 @@ class Simulation(object):
         # TODO: Call self._create_population() and pass in the correct parameters.
         # Store the array that this method will return in the self.population attribute.
 
-    def _create_population(self, initial_infected):
-        # TODO: Finish this method!  This method should be called when the simulation
-        # begins, to create the population that will be used. This method should return
-        # an array filled with Person objects that matches the specifications of the
-        # simulation (correct number of people in the population, correct percentage of
-        # people vaccinated, correct number of initially infected people).
+    def _create_population(self, initial_infected,):
         population = []
         infected_count = 0
-        while len(population) != pop_size:
+        vax_count = 0
+        while len(population) != self.population_size:
+            #Create infected population
             if infected_count !=  initial_infected:
-                # TODO: Create all the infected people first, and then worry about the rest.
-                # Don't forget to increment infected_count every time you create a
-                # new infected person!
-                pass
+                self.population.append(Person(self.next_person_id,False, self.virus_name))
+                infected_count += 1
+            #Create vax population
+            elif vax_count != (self.population_size * self.vax_percentage):
+                self.population.append(Person(self.next_person_id,True,))
+                vax_count += 1
             else:
-                # Now create all the rest of the people.
-                # Every time a new person will be created, generate a random number between
-                # 0 and 1.  If this number is smaller than vacc_percentage, this person
-                # should be created as a vaccinated person. If not, the person should be
-                # created as an unvaccinated person.
-                pass
+                #Create non-vax non-infected population
+                self.population.append(Person(self.next_person_id,False,))
+            self.next_person_id += 1
+        return population
+
+            # TODO: Create all the infected people first, and then worry about the rest.
+            # Don't forget to increment infected_count every time you create a
+            # new infected person!
+            # Now create all the rest of the people.
+            # Every time a new person will be created, generate a random number between
+            # 0 and 1.  If this number is smaller than vacc_percentage, this person
+            # should be created as a vaccinated person. If not, the person should be
+            # created as an unvaccinated person.
             # TODO: After any Person object is created, whether sick or healthy,
             # you will need to increment self.next_person_id by 1. Each Person object's
             # ID has to be unique!
-        return population
+            # TODO: Finish this method!  This method should be called when the simulation
+            # begins, to create the population that will be used. This method should return
+            # an array filled with Person objects that matches the specifications of the
+            # simulation (correct number of people in the population, correct percentage of
+            # people vaccinated, correct number of initially infected people).
 
     def _simulation_should_continue(self):
         # TODO: Complete this method!  This method should return True if the simulation
