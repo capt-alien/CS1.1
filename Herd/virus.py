@@ -5,3 +5,8 @@ class Virus(object):
         self.name = name
         self.mortality_rate = mortality_rate
         self.reproduction_rate = reproduction_rate
+
+
+# hib = Virus("HIV", .8, .3)
+#
+# print((hib.mortality_rate * 100))

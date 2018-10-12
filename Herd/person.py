@@ -1,5 +1,5 @@
 import random
-# TODO: Import the virus clase
+import virus
 
 class Person(object):
     '''
@@ -41,18 +41,39 @@ class Person(object):
             is_vaccinated attribute is changed to True, and set self.infection to None.
     '''
 
-    def __init__(self, _id, is_vaccinated, infection=None):
+    def __init__(self, _id, is_vaccinated, infection):
         # TODO:  Finish this method.  Follow the instructions in the class documentation
         # to set the corret values for the following attributes.
-        self._id = None
-        self.is_vaccinated = None
-        self.is_alive = None
-        self.infection = None
+        self._id = _id
+        self.is_vaccinated = False
+        self.is_alive = True
+        self.infection = False
 
 
-    def did_survive_infection(self):
+    def did_survive_infection(self, mortality_rate):
+        if self.infection == True and self.is_vaccinated == False:
+            chance_of_death = random.randint(0,100)
+            if chance_of_death <= (mortality_rate * 100):
+                self.is_alive = False
+            else:
+                self.is_vaccinated = True
+                self.infection = False
+        else:
+            pass
+
+
+# Testing
+# hiv = virus.Virus("HIV", .1, .3)
+# alex = Person(1,False,True)
+# alex.infection = True
+#
+# alex.did_survive_infection(hiv.mortality_rate)
+#
+# print(alex.is_alive)
+# print(alex.is_vaccinated)
+
+        #is_alive is set to True by default
         # TODO:  Finish this method. Follow the instructions in the class documentation
         # TODO: You will need to decide what parameters you pass into this method based on how you structure your class.
         # for resolve_infection.  If person dies, set is_alive to False and return False.
-        # If person lives, set is_vaccinated = True, infection = None, return True.  
-        pass
+        # If person lives, set is_vaccinated = True, infection = None, return True.

@@ -14,5 +14,5 @@ def test_virus():
     assert hiv.reproduction_rate ==.3
 
 # self.name = name
-# self.mortaility_rate = mortaility_rate
+# self.mortality_rate = mortaility_rate
 # self.reproduction_rate = reproduction_rate
