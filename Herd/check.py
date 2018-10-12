@@ -1,19 +1,18 @@
-def _create_population(self, initial_infected,):
-    population = []
-    infected_count = 0
-    vax_count = 0
-    while len(population) != self.population_size:
-        #Create infected population
-        if infected_count !=  initial_infected:
-            self.population.append(Person(self.next_person_id,False, self.virus_name))
-            infected_count += 1
-        #Create vax population
-        elif vax_count != (self.population_size * self.vax_percentage):
-            self.population.append(Person(self.next_person_id,True,))
-            vax_count += 1
-        else:
-            #Create non-vax non-infected population
-            self.population.append(Person(self.next_person_id,False,))
-        # assigns a new id
-        self.next_person_id += 1
-    return population
+
+def validator_num (input_text, low_num, high_num):
+    is_valid = False
+    while True:
+        try:
+            print(low_num)
+            print(high_num)
+            entry = input(input_text)
+            if entry.isdigit() == True and int(entry) > int(low_num) and int(entry) < int(high_num) :
+                is_valid = True
+                return entry
+            else:
+                print("Invalid Input! Try again...")
+        except:
+            print("Error Invalid Input! Try again...")
+
+
+result = validator_num("test question? ", 0, 100)

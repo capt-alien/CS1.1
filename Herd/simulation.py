@@ -3,6 +3,23 @@ random.seed(42)
 from person import Person
 from logger import Logger
 
+def validator_num (input_text, low_num, high_num):
+    is_valid = False
+    while True:
+        try:
+            print(low_num)
+            print(high_num)
+            entry = input(input_text)
+            if entry.isdigit() == True and int(entry) > int(low_num) and int(entry) < int(high_num) :
+                is_valid = True
+                return entry
+            else:
+                print("Invalid Input! Try again...")
+        except:
+            print("Error Invalid Input! Try again...")
+
+
+
 class Simulation(object):
     '''
     Main class that will run the herd immunity simulation program.  Expects initialization
@@ -200,7 +217,20 @@ class Simulation(object):
         # TODO: Remember to call self.logger.log_interaction() during this method!
         pass
 
+# We are going to have to edit infect newly infected method when I get Marrianna's functions
+
     def _infect_newly_infected(self):
+        #creates a loop to see see if people interacted with infected people
+        for person in population:
+            if infect_interaction = true and person.is_vaccinated = False:
+                #determines random number to base chance off
+                infect_chance = random.randint(0,100)
+                #infects unlucky person
+                if infect_chance <= (virus.reproduction_rate * 100):
+                    person.infection = virus.name
+
+
+
         # TODO: Finish this method! This method should be called at the end of
         # every time step.  This method should iterate through the list stored in
         # self.newly_infected, which should be filled with the IDs of every person
