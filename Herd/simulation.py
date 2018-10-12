@@ -113,6 +113,7 @@ class Simulation(object):
             else:
                 #Create non-vax non-infected population
                 self.population.append(Person(self.next_person_id,False,))
+            # assigns a new id
             self.next_person_id += 1
         return population
 
