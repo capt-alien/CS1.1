@@ -55,8 +55,32 @@ class Logger(object):
         # full file name of the file that the logs will be written to.
         self.file_name = file_name
 
-    def write_metadata(self, pop_size, vacc_percentage, virus_name, mortality_rate,
-                       basic_repro_num):
+# https://www.pythonforbeginners.com/cheatsheet/python-file-handling
+# Also got help from Nolen Kovacik for this one:
+
+    def write_metadata(self, pop_size, vax_percentage, virus_name, mortality_rate, basic_repro_num):
+        # writes to text file
+        with open(self.file_name, "w") as file:
+            file.write(f"{population_size}\t {vax_percentage}\t {virus_name}\t {mortality_rate}\t {infection_rate}")
+            file.write("/n========================================================/n")
+            file.write(f"     Population Size: {population_size}\n")
+            file.write(f"    Vaccination Rate: {vax_percentage}\n")
+            file.write(f"          Virus Name: {virus_name}\n" )
+            file.write(f"      Mortality Rate: {mortality_rate}\n")
+            file.write(f"      Infection Rate: {infection_rate}\n")
+            file.write(f" # initial infection: {initial_infected}\n")
+            file.write(f"   # of interactions: {interactions}\n")
+        file.close()
+
+        #Print same data to consol:
+        print("     Population Size: {population_size}")
+        print("    Vaccination Rate: {vax_percentage}")
+        print("          Virus Name: {virus_name}" )
+        print("      Mortality Rate: {mortality_rate}")
+        print("      Infection Rate: {infection_rate}")
+        print(" # initial infection: {initial_infected}")
+        print("   # of interactions: {interactions}")
+
         # TODO: Finish this method.  The simulation class should use this method
         # immediately upon creation, to log the specific parameters of the simulation
         # as the first line of the file.  This line of metadata should be tab-delimited
