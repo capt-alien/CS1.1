@@ -100,19 +100,9 @@ class Simulation(object):
         self.file_name = "{}_simulation_pop_{}_vp_{}_infected_{}.txt".format(
             virus_name, population_size, vacc_percentage, initial_infected)
 
-        # TODO: Create a Logger object and bind it to self.logger.  You should use this
-        # logger object to log all events of any importance during the simulation.  Don't forget
-        # to call these logger methods in the corresponding parts of the simulation!
         self.logger = None
-
-        # This attribute will be used to keep track of all the people that catch
-        # the infection during a given time step. We'll store each newly infected
-        # person's .ID attribute in here.  At the end of each time step, we'll call
-        # self._infect_newly_infected() and then reset .newly_infected back to an empty
-        # list.
         self.newly_infected = []
-        # TODO: Call self._create_population() and pass in the correct parameters.
-        # Store the array that this method will return in the self.population attribute.
+
 
     def _create_population(self, initial_infected,):
         population = []
@@ -134,53 +124,50 @@ class Simulation(object):
             self.next_person_id += 1
         return population
 
-            # TODO: Create all the infected people first, and then worry about the rest.
-            # Don't forget to increment infected_count every time you create a
-            # new infected person!
-            # Now create all the rest of the people.
-            # Every time a new person will be created, generate a random number between
-            # 0 and 1.  If this number is smaller than vacc_percentage, this person
-            # should be created as a vaccinated person. If not, the person should be
-            # created as an unvaccinated person.
-            # TODO: After any Person object is created, whether sick or healthy,
-            # you will need to increment self.next_person_id by 1. Each Person object's
-            # ID has to be unique!
-            # TODO: Finish this method!  This method should be called when the simulation
-            # begins, to create the population that will be used. This method should return
-            # an array filled with Person objects that matches the specifications of the
-            # simulation (correct number of people in the population, correct percentage of
-            # people vaccinated, correct number of initially infected people).
 
     def _simulation_should_continue(self):
-        # TODO: Complete this method!  This method should return True if the simulation
-        # should continue, or False if it should not.  The simulation should end under
-        # any of the following circumstances:
-        #     - The entire population is dead.
-        #     - There are no infected people left in the population.
-        # In all other instances, the simulation should continue.
-        pass
+                death_counter = 0
+        for person in self.population:
+            # if not alive
+            if person.is_alive == False:
+                death_counter += 1
+                print("Death counter value: {}".format(death_counter))
+        if len(self.population) == death_counter:
+            print("Everyone is dead!")
+            return False
+        # EVERYBODY vaccinated
+        not_infected_counter = 0
+        for person in self.population:
+            # if person does not have a virus and person is alive
+            if person.infection == None:  # and person.is_alive == True: <- you filter out people that are dead
+                not_infected_counter += 1
+        if len(self.population) ==  not_infected_counter:
+            print("A good amount of people do not have the virus!!")
+            return False
+        # SIMULATION should stop
+        print("Simulation will continue to run!!")
+        return True
+
 
     def run(self):
-        # TODO: Finish this method.  This method should run the simulation until
-        # everyone in the simulation is dead, or the disease no longer exists in the
-        # population. To simplify the logic here, we will use the helper method
-        # _simulation_should_continue() to tell us whether or not we should continue
-        # the simulation and run at least 1 more time_step.
-
-        # This method should keep track of the number of time steps that
-        # have passed using the time_step_counter variable.  Make sure you remember to
-        # the logger's log_time_step() method at the end of each time step, pass in the
-        # time_step_counter variable!
         time_step_counter = 0
         # TODO: Remember to set this variable to an intial call of
         # self._simulation_should_continue()!
-        should_continue = None
+        should_continue = self._simulation_should_continue()
         while should_continue:
         # TODO: for every iteration of this loop, call self.time_step() to compute another
         # round of this simulation.  At the end of each iteration of this loop, remember
         # to rebind should_continue to another call of self._simulation_should_continue()!
-            pass
-        print('The simulation has ended after {time_step_counter} turns.'.format(time_step_counter))
+            self.time_step()
+            # Increment the counter by 1 each time
+            time_step_counter += 1
+            # update the logger's log_time_step method by passing in the
+            # time_step_counter
+            # Coment in once you create logger:
+            # log_time_step(time_step_counter)
+            # rebind should_continue to another call of self._simulation_should_continue()
+            should_continue = self._simulation_should_continue()
+        print('The simulation has ended after {} turns.'.format(time_step_counter))
 
     def time_step(self):
         # TODO: Finish this method!  This method should contain all the basic logic

@@ -73,7 +73,7 @@ class Logger(object):
         file.close()
 
         #Print same data to consol:
-        print("     Population Size: {population_size}")
+        print(f"     Population Size: {population_size}")
         print("    Vaccination Rate: {vax_percentage}")
         print("          Virus Name: {virus_name}" )
         print("      Mortality Rate: {mortality_rate}")
