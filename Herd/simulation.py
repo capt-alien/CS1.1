@@ -240,6 +240,7 @@ class Simulation(object):
         """
         pass
 
+
     def run(self):
         # TODO: Finish this method.  This method should run the simulation until
         # everyone in the simulation is dead, or the disease no longer exists in the
@@ -251,15 +252,6 @@ class Simulation(object):
         # have passed using the time_step_counter variable.  Make sure you remember to
         # the logger's log_time_step() method at the end of each time step, pass in the
         # time_step_counter variable!
-        """
-        Pseudocode:
-        time_step_counter = 0
-        while simulation_should_continue():
-            self.time_step()
-            time_step_counter += 1
-            log_time_step(time_step_counter)
-            should_continue = self.simulation_should_continue
-        """
         time_step_counter = 0
         should_continue = self._simulation_should_continue()
         while should_continue:

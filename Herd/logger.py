@@ -130,7 +130,10 @@ class Logger(object):
     def log_time_step(self, time_step_number):
         next_step = int(time_step_number + 1)
         with open(self.file_name, "a") as file:
+            file.write("/n ===========================================/n")
             file.write(f"/n Time step {time_step_number} has ended, starting time step {next_step}/n")
+            file.write("/n ===========================================/n")
+            file.close()
 
         # TODO: Finish this method.  This method should log when a time step ends, and a
         # new one begins.  See the documentation for more information on the format of the log.
